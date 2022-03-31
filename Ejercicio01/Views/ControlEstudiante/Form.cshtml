@@ -1,0 +1,61 @@
+﻿@model Ejercicio01.Models.EstudianteViewModel
+
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Form</h1>
+
+<h4>EstudianteViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <input type="hidden" id="operacion" value="@ViewData["Operaciones"]"/>
+        <form asp-action="Form">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="IDEstudiante" class="form-control" type="hidden"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombresEstudiante" class="control-label"></label>
+                <input asp-for="NombresEstudiante" class="form-control" />
+                <span asp-validation-for="NombresEstudiante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApellidosEstudiante" class="control-label"></label>
+                <input asp-for="ApellidosEstudiante" class="form-control" />
+                <span asp-validation-for="ApellidosEstudiante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodigoEstudiante" class="control-label"></label>
+                <input asp-for="CodigoEstudiante" class="form-control" />
+                <span asp-validation-for="CodigoEstudiante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoEstudiante" class="control-label"></label>
+                <input asp-for="CorreoEstudiante" class="form-control" />
+                <span asp-validation-for="CorreoEstudiante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        //Cuando la operación sobre el formulario es de lectura.
+        $(document).ready(function () {
+            if ($("#operacion").val() == "Leer") {
+                $("form").find("input, select").attr("disabled", true);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Ejercicio01.Models.CarreraViewModel>
+@using Ejercicio01.Utilidades
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Estudiantes</h3>
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-success d-block" asp-action="Form" asp-route-operaciones="@Operaciones.Agregar">Agregar Carrera</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IDCarrera)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CodigoCarrera)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NombreCarrera)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IDCarrera)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CodigoCarrera)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NombreCarrera)
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" asp-route-IDCarrera="@item.IDCarrera" asp-action="Form" asp-route-operaciones="@Operaciones.Modificar">Modificar</a>
+                                <a class="btn btn-warning" asp-route-IDCarrera="@item.IDCarrera" asp-action="Form" asp-route-operaciones="@Operaciones.Leer">Leer</a>
+                                <a class="btn btn-danger" asp-route-IDCarrera="@item.IDCarrera" asp-action="Delete">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h3 class="text-center">Lista Vacía.</h3>
+        }
+    </div>
+</div>
